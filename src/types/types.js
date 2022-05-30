@@ -9,8 +9,8 @@ export const types = {
   authRegister: '[auth] Register',
   authLogout: '[auth] Logout',
 
-  contactSetActive: '[event] Set active',
-  contactClearActive: '[event] Clear active event',
+  contactSetActive: '[contact] Set active',
+  contactClearActive: '[contact] Clear active event',
   contactAddNew: '[contact] New contact',
   contactUpdated: '[contact] Update contact',
   contactDeleted: '[contact] Delete contact',

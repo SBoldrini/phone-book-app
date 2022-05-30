@@ -32,8 +32,11 @@ export const startAddNewContact = (contact) => {
       const resp = await fetchForm('api/contacts', contact, 'POST');
       const body = await resp.json();
 
-      console.log(body)
-      //TODO: Terminar Add New
+      if (body.ok) {
+        dispatch(contactAddNew(contact));
+      } else {
+        console.log(body.msg) // Terminar manejo de errores
+      }
 
     } catch (error) {
       console.log(error);
@@ -54,19 +57,26 @@ export const contactSetActive = (contact) => ({
 });
 
 export const contactClearActive = () => ({
-  type: types.contactSetActive
+  type: types.contactClearActive
 });
 
 
 export const startUpdateContact = (contact) => {
-  return async(dispatch) => {
+  return async(dispatch, getState) => {
+
+    const {id} = getState().contacts.activeContact;
 
     try {
 
-      const resp = await fetchForm(`api/contact/${contact.id}`, contact, 'PUT');
+      const resp = await fetchForm(`api/contacts/${id}`, contact, 'PUT');
       const body = await resp.json();
 
-      console.log(body)
+      if (body.ok) {
+        dispatch(contactUpdated(contact));
+      } else {
+        console.log(body.msg)
+      }
+
       
     } catch (error) {
       console.log(error);

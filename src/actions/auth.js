@@ -9,8 +9,7 @@ export const startLogin = (email, password) => {
       const body = await resp.json();
   
       if (body.ok) {
-        localStorage.setItem('user', email);
-
+        
         dispatch(login({
           name: body.name,
           email: body.email

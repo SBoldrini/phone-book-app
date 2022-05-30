@@ -20,7 +20,9 @@ export const contactReducer = (state=initialState, action) => {
     case types.contactSetActive:
       return {
         ...state,
-        activeContact: true
+        activeContact: {
+          ...action.payload
+        }
       }
 
     case types.contactClearActive:

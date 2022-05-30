@@ -9,7 +9,15 @@ import { Form } from 'react-bootstrap';
 
 import { useForm } from '../../hooks/useForm';
 import { uiCloseModal } from '../../actions/ui';
-import { startAddNewContact, startUpdateContact } from '../../actions/contact';
+import { contactClearActive, startAddNewContact, startUpdateContact } from '../../actions/contact';
+import { useEffect, useState } from 'react';
+
+
+const initContact = {
+  firstName: '',
+  lastName: '',
+  phone: ''
+}
 
 export const ContactModal = () => {
 
@@ -18,28 +26,51 @@ export const ContactModal = () => {
   const {isModalOpen} = useSelector(state => state.ui);
   const {activeContact} = useSelector(state => state.contacts);
 
-  const [modalValues, handleInputChange] = useForm({
-    firstName: '',
-    lastName: '',
-    phone: ''
-  });
+
+  const [modalValues, setModalValues] = useState(initContact);
 
   const {firstName, lastName, phone} = modalValues;
 
-  const handleSubmit = () => {
-    console.log('Submit del modal')
+  useEffect(() => {
+    if (!!activeContact) {
+      setModalValues({...activeContact});
+    } else {
+      setModalValues(initContact);
+    }
+  }, [activeContact, setModalValues]);
 
-    // if (id === '') {
-    //   dispatch(startAddNewContact(modalValues));
-    // } else {
-    //   dispatch(startUpdateContact(modalValues));
-    // }
+  const handleInputChange = ({target}) => {
+    setModalValues({
+      ...modalValues,
+      [target.name]: target.value
+    });
+  }
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!!activeContact) {
+      dispatch(startUpdateContact(modalValues));
+    } else {
+      dispatch(startAddNewContact(modalValues));
+    }
+    dispatch(contactClearActive());
+    dispatch(uiCloseModal());
+
+  }
+
+  const closeModal = () => {
+    dispatch(contactClearActive());
+    dispatch(uiCloseModal());
+    setModalValues(initContact);
   }
 
   return (
     <Modal
       show={isModalOpen}
-      onHide={() => {dispatch(uiCloseModal())}}
+      onHide={closeModal}
+      // onExited={() => dispatch(contactClearActive())}
       centered={true}
     >
     <Modal.Header closeButton>
@@ -58,6 +89,7 @@ export const ContactModal = () => {
             placeholder="First Name"
             required
             autoComplete="off"
+            name="firstName"
             value={firstName}
             onChange={handleInputChange}
           />
@@ -69,6 +101,7 @@ export const ContactModal = () => {
             placeholder="Last Name"
             required
             autoComplete="off"
+            name="lastName"
             value={lastName}
             onChange={handleInputChange}
           />
@@ -80,12 +113,13 @@ export const ContactModal = () => {
             placeholder="Phone"
             required
             autoComplete="off"
+            name="phone"
             value={phone}
             onChange={handleInputChange}
           />
           </Form.Group>
 
-          <Button>
+          <Button type='submit' >
             <FontAwesomeIcon icon={faSave} /> Save
           </Button>
         </Form>
