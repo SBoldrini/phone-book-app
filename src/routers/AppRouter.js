@@ -1,20 +1,18 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// import { AuthRouter } from './AuthRouter';
-// import { PhoneBookPage } from '../components/phoneBook/PhoneBookPage';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import { AuthRouter } from './AuthRouter';
 import { Dashboard } from './Dashboard';
-import { LoginPage } from '../components/auth/LoginPage';
 
 
 export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={
+        <Route path="/auth/*" element={
           <PublicRoute>
-            <LoginPage />
+            <AuthRouter />
           </PublicRoute>
         }/>
 

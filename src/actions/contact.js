@@ -86,9 +86,7 @@ export const startDeleteContact = (id) => {
 
 
     try {
-
-      console.log('Eliminar id:', id)
-      
+     
       const resp = await fetchForm(`api/contacts/${id}`, {}, 'DELETE');
       const body =  await resp.json();
 

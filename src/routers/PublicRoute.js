@@ -7,6 +7,6 @@ export const PublicRoute = ({children}) => {
   const {logged} = useSelector(state => state.auth);
 
   return logged
-    ? <Navigate to="/phonebook" />
+    ? <Navigate to="/phonebook" replace={true} />
     : children
 }

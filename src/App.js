@@ -1,11 +1,17 @@
+import { Provider } from 'react-redux';
+
+import { store } from './store/store';
+import { AppRouter } from './routers/AppRouter';
+
+import './scss/styles.scss';
 
 const App = () => {
   return (
-    <div>
-      <h1>Phone Book App</h1>
-      <hr />
+    <Provider store={ store }>
 
-    </div>
+      <AppRouter />
+      
+    </Provider>
   );
 }
 
