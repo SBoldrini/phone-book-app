@@ -34,9 +34,7 @@ export const startAddNewContact = (contact) => {
 
       if (body.ok) {
         dispatch(contactAddNew(contact));
-      } else {
-        console.log(body.msg) // Terminar manejo de errores
-      }
+      } 
 
     } catch (error) {
       console.log(error);

@@ -35,16 +35,13 @@ export const contactReducer = (state=initialState, action) => {
       return {
         ...state,
         contacts: state.contacts.map(
-          c => (c.id === action.payload.id) ? action.payload : c
-        )
+          c => (c.id === action.payload.id) ? action.payload : c)
       }
 
     case types.contactDeleted:
       return {
         ...state,
-        contacts: state.contacts.filter(
-          c => (c.id !== action.payload)
-        )
+        contacts: state.contacts.filter(c => (c.id !== action.payload))
       }
 
     case types.contactLoaded:

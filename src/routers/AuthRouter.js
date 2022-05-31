@@ -5,6 +5,7 @@ import { RegisterPage } from '../components/auth/RegisterPage';
 
 
 export const AuthRouter = () => {
+
   return (
     <>
       <Routes>

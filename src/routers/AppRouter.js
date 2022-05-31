@@ -7,6 +7,7 @@ import { Dashboard } from './Dashboard';
 
 
 export const AppRouter = () => {
+
   return (
     <BrowserRouter>
       <Routes>

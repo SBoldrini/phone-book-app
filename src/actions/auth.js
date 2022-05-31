@@ -9,6 +9,7 @@ export const startLogin = (email, password) => {
       const body = await resp.json();
   
       if (body.ok) {
+        localStorage.setItem('logged', email);
         
         dispatch(login({
           name: body.name,
@@ -38,6 +39,7 @@ export const startRegister = (name, email, password) => {
       const body = await resp.json();
   
       if (body.ok) {
+        localStorage.setItem('logged', email);
         
         dispatch(login({
           name: body.name,
