@@ -1,5 +1,10 @@
-import { fetchForm } from "../helpers/fetch";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+import { fetchForm } from '../helpers/fetch';
 import { types } from "../types/types";
+
+const MySwal = withReactContent(Swal);
 
 export const startLogin = (email, password) => {
   return async(dispatch) => {
@@ -16,12 +21,11 @@ export const startLogin = (email, password) => {
           email: body.email
         }));
       } else {
-        console.log(body.msg)
-        //TODO: Finalizar manejo de errores en pantalla
+        MySwal.fire('Error', 'User or Password are not correct. Try again!.', 'error');
       }
       
     } catch (error) {
-      console.log(error);
+      MySwal.fire('Error', error.message, 'error');
     }
 
 
@@ -47,12 +51,11 @@ export const startRegister = (name, email, password) => {
         }));
 
       } else {
-        console.log(body.msg)
-        //TODO: Finalizar manejo de errores en pantalla
+        MySwal.fire('Error', body.msg, 'error');
       }
       
     } catch (error) {
-      console.log(error)
+      MySwal.fire('Error', error.message, 'error');
     }
 
   }

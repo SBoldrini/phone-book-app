@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-
 import { startLoadContact } from '../../actions/contact';
 import { ContactList } from './ContactList';
 import { ContactModal } from './ContactModal';

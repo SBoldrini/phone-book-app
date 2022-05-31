@@ -1,26 +1,30 @@
+
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Spinner from 'react-bootstrap/Spinner';
-
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 import { useForm } from '../../hooks/useForm';
 import { startRegister } from '../../actions/auth';
+
+const MySwal = withReactContent(Swal);
 
 export const RegisterPage = () => {
 
   const dispatch = useDispatch();
 
   const [formValues, handleInputChange, reset] = useForm({
-    name: 'Test Test',
-    email: 'test@test.com',
-    password: '123456',
-    repassword: '123456'
+    name: '',
+    email: '',
+    password: '',
+    repassword: ''
   });
 
   const {name, email, password, repassword} = formValues;
@@ -28,16 +32,18 @@ export const RegisterPage = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     
-    if (isFormRegisterValid) {
+    if (isFormRegisterValid()) {
       dispatch(startRegister(name, email, password));
     }
+    reset();
   }
 
   const isFormRegisterValid = () => {
     if(name.trim().length === 0) {
+      MySwal.fire('Error', 'Name is required', 'error');
       return false;
     } else if (password !== repassword || password.length < 5) {
-      // dispatch(setError('Password must be at least 6 character and match each other.'));
+      MySwal.fire('Error', 'Password must be at least 6 character and match each other. Try again!.', 'error');
       return false;
     }
     return true;
@@ -48,10 +54,10 @@ export const RegisterPage = () => {
   }
 
   return (
-    <Container className="text-center">
+    <Container className="text-center register__display">
 
 
-      <div className="login__form-signin">
+      <div className="register__form-signin">
         <h1 className="fw-normal">Please register a new account</h1>
 
         <Form className="mt-3" onSubmit={handleRegister}>
@@ -151,19 +157,7 @@ export const RegisterPage = () => {
               <Button
                 type="submit"
                 size="lg"
-              // disabled={loading}
               >
-                {/* {
-                  loading && <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                  />
-                }
-                {loading ? ' Logging in...' : 'Sign in'} */}
-
                 Register
 
               </Button>

@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { Form } from 'react-bootstrap';
 
-import { useForm } from '../../hooks/useForm';
 import { uiCloseModal } from '../../actions/ui';
 import { contactClearActive, startAddNewContact, startUpdateContact } from '../../actions/contact';
 import { useEffect, useState } from 'react';
@@ -70,7 +69,6 @@ export const ContactModal = () => {
     <Modal
       show={isModalOpen}
       onHide={closeModal}
-      // onExited={() => dispatch(contactClearActive())}
       centered={true}
     >
     <Modal.Header closeButton>

@@ -1,5 +1,10 @@
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 import { types } from '../types/types';
 import { fetchForm } from '../helpers/fetch';
+
+const MySwal = withReactContent(Swal);
 
 
 export const startLoadContact = () => {
@@ -13,7 +18,7 @@ export const startLoadContact = () => {
         dispatch(contactLoaded(body.contacts));
       
     } catch (error) {
-      console.log(error);
+      MySwal.fire('Error', 'error.message', 'error');
     }
   }
 }
@@ -37,7 +42,7 @@ export const startAddNewContact = (contact) => {
       } 
 
     } catch (error) {
-      console.log(error);
+      MySwal.fire('Error', error.message, 'error');
     }
 
   }
@@ -72,12 +77,12 @@ export const startUpdateContact = (contact) => {
       if (body.ok) {
         dispatch(contactUpdated(contact));
       } else {
-        console.log(body.msg)
+        MySwal.fire('Error', body.msg, 'error');
       }
 
       
     } catch (error) {
-      console.log(error);
+      MySwal.fire('Error', error.message, 'error');
     }
   }
 }
@@ -101,11 +106,11 @@ export const startDeleteContact = (id) => {
       if(body.ok) {
         dispatch(contactDeleted(id));
       } else {
-        console.log(body.msg);
+        MySwal.fire('Error', body.msg, 'error');
       }
 
     } catch (error) {
-      console.log(error);
+      MySwal.fire('Error', error.message, 'error');
     }
   }
 } 

@@ -4,16 +4,11 @@ import Col from 'react-bootstrap/Col';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Spinner from 'react-bootstrap/Spinner';
-import Alert from 'react-bootstrap/Alert';
 
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { useState } from 'react';
 import { useForm } from '../../hooks/useForm';
-import { useFetchForm } from '../../hooks/useFetchForm';
-import { useValidateForm } from '../../hooks/useValidateForm';
 import { startLogin } from '../../actions/auth';
 
 
@@ -22,25 +17,17 @@ export const LoginPage = () => {
   const dispatch = useDispatch();
 
   const [formValues, handleInputChange, reset] = useForm({
-    email: 'test@test.com',
-    password: '123456'
+    email: '',
+    password: ''
   });
 
   const {email, password} = formValues;
 
-  // const [show, setShow] = useState(true);
-
-  // const { handleSubmit:handleLogin, check, validated } = useValidateForm();
-
-  // const { data, loading, error } = useFetchForm({formValues, validated});
-
-  // console.log(data)
-
-  // const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch(startLogin(email, password));
+    reset();
   }
 
   const handleInputClick = ({ target }) => {
@@ -48,7 +35,7 @@ export const LoginPage = () => {
   }
 
   return (
-    <Container className="text-center">
+    <Container className="text-center login__display">
 
 
       <div className="login__form-signin">
@@ -102,29 +89,12 @@ export const LoginPage = () => {
               </FloatingLabel>
             </Col>
 
-            {/* <Col sm={12}>
-              <Alert variant="danger" onClose={() => setShow(false)} show={error && show} dismissible>
-                <Alert.Heading>{error}</Alert.Heading>
-                <p>Please talk to the admin.</p>
-              </Alert>
-            </Col> */}
 
             <Col xs={12} className="d-grid d-block">
               <Button
                 type="submit"
                 size="lg"
-                // disabled={loading}
               >
-                {/* {
-                  loading && <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                  />
-                }
-                {loading ? ' Logging in...' : 'Sign in'} */}
                 Sign in
               </Button>
             </Col>
