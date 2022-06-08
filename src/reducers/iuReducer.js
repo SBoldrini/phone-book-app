@@ -2,6 +2,7 @@ import { types } from "../types/types";
 
 const initialState = {
   isModalOpen: false,
+  isConfirmOpen: false
 }
 
 export const iuReducer = (state= initialState, action) => {
@@ -17,6 +18,18 @@ export const iuReducer = (state= initialState, action) => {
       return {
         ...state,
         isModalOpen: false
+      }
+    
+    case types.uiOpenConfirm:
+      return {
+        ...state,
+        isConfirmOpen: true
+      }
+
+    case types.uiCloseConfirm:
+      return {
+        ...state,
+        isConfirmOpen: false
       }
   
     default:

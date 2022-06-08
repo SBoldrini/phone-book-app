@@ -45,12 +45,15 @@ export const ContactList = () => {
         </thead>
         <tbody>
           {
-            filterContact(contacts, term).map(contact => (
+            term ? filterContact(contacts, term).map(contact => (
               <ContactItem 
                 key={contact.id}
                 {...contact}
-              />
-            ))
+              />))
+              : contacts.map(contact => (<ContactItem 
+                key={contact.id}
+                {...contact}
+                />))
           }
         </tbody>
       </Table>

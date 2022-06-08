@@ -94,9 +94,12 @@ const contactUpdated = (contact) => ({
 })
 
 
-export const startDeleteContact = (id) => {
-  return async(dispatch) => {
+export const startDeleteContact = () => {
+  return async(dispatch, getState) => {
 
+    const activeContact = getState().contacts;
+
+    const {id} = getState().contacts.activeContact;
 
     try {
      

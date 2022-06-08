@@ -53,6 +53,7 @@ export const ContactModal = () => {
       dispatch(startUpdateContact(modalValues));
     } else {
       dispatch(startAddNewContact(modalValues));
+      setModalValues(initContact);
     }
     dispatch(contactClearActive());
     dispatch(uiCloseModal());
