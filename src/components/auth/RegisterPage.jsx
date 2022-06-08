@@ -54,11 +54,11 @@ export const RegisterPage = () => {
   }
 
   return (
-    <Container className="text-center register__display">
+    <Container className="text-center">
 
 
-      <div className="register__form-signin">
-        <h1 className="fw-normal">Please register a new account</h1>
+      <div className="register__form-signin position-absolute top-50 start-50 translate-middle">
+        <h1 className="fw-normal">Register a new account</h1>
 
         <Form className="mt-3" onSubmit={handleRegister}>
 

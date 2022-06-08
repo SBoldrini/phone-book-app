@@ -35,10 +35,9 @@ export const LoginPage = () => {
   }
 
   return (
-    <Container className="text-center login__display">
+    <Container className="text-center">
 
-
-      <div className="login__form-signin">
+      <div className="login__form-signin position-absolute top-50 start-50 translate-middle">
         <h1 className="fw-normal">Please sign in</h1>
 
         <Form className="mt-3" onSubmit={handleLogin}>

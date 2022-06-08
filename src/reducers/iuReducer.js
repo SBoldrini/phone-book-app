@@ -1,7 +1,7 @@
 import { types } from "../types/types";
 
 const initialState = {
-  isModalOpen: false 
+  isModalOpen: false,
 }
 
 export const iuReducer = (state= initialState, action) => {
